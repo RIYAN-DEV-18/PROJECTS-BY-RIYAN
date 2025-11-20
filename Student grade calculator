@@ -1,0 +1,144 @@
+import java.util.Scanner;
+
+class Markscalculator {
+    
+    String[] studentName;
+    int[][] subjectMarks;
+    int[] totalMarks;
+    double[] averageMarks;
+    String[] studentGrade;
+    
+    Markscalculator (int n) {
+        
+        this.subjectMarks = new int[n][5];
+        this.studentName = new String[n];
+        this.totalMarks = new int[n];
+        this.averageMarks = new double[n];
+        this.studentGrade = new String[n];
+        
+    }
+    
+     void totalMarks(int n) {
+        
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 5; j++) {
+                totalMarks[i] += subjectMarks[i][j];
+        }
+        System.out.println( "Total Marks of " + studentName[i]  + ": " + totalMarks[i]);
+    }
+    
+    }
+    
+    double averageMarks(int n) {
+         
+        double totalAverage = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 5; j++) {
+                averageMarks[i] += subjectMarks[i][j];
+                totalAverage +=  subjectMarks[i][j];
+            }
+            averageMarks[i] = averageMarks[i] / 5;
+        }
+        
+        totalAverage = totalAverage / n;
+        return totalAverage;
+    }
+    
+    String grade(int n) {
+        
+        for (int i = 0; i < n; i++) {
+            
+       if (averageMarks[i] >= 80) {
+           System.out.println((i+1)+": "+studentName[i] +" has A GRADE");
+           studentGrade[i] = "A GRADE";
+       } 
+       else if (averageMarks[i] >= 70) {
+        System.out.println((i+1)+": "+studentName[i] +" has B GRADE");
+        studentGrade[i] = "B GRADE";
+       }
+       else if (averageMarks[i] >= 60) {
+           System.out.println((i+1)+": "+studentName[i] +" has C GRADE");
+            studentGrade[i] = "C GRADE";
+       } 
+       else if (averageMarks[i] >= 50) {
+           System.out.println((i+1)+": "+studentName[i] +" has D GRADE");
+            studentGrade[i] = "D GRADE";
+       } 
+       else {
+           System.out.println((i+1)+": "+studentName[i] +" is FAIL");
+           studentGrade[i] = "FAIL";
+        }
+    }
+    return "----------";   
+    }   
+    
+    void displayInfo(int n) {
+        for (int i = 0; i < n; i++) {
+
+                System.out.printf("%-15s %-15s %-15s %-10s%n","Name","TotalMarks","Average",   "Grades");
+                System.out.println("---------------------------------------------------------");
+                System.out.printf("%-15s%-15d%-15f%-10s%n",studentName[i], totalMarks[i],averageMarks[i], studentGrade[i]);
+                System.out.println(" ");
+            
+        }
+    }
+   
+    
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        
+        System.out.println("Enter Number of Students: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        
+        Markscalculator marksCalculator = new Markscalculator(n);
+        
+        
+        for (int i = 0; i < n; i++) {
+            
+            System.out.println("===== Enter Student Name ====== ");
+            String name = sc.nextLine();
+            marksCalculator.studentName[i] = name;
+            
+            System.out.println("Enter Student Marks");
+            for (int j = 0; j < 5; j++) {
+                System.out.println("-------------");
+                System.out.println("Subject " + (j+1) + ": ");
+                int marks = sc.nextInt();
+                sc.nextLine();
+                marksCalculator.subjectMarks[i][j] = marks;
+         
+               
+            }
+            
+        }
+        
+            System.out.println("");
+            System.out.println("DISPLAYING TOTAL MARKS");
+            System.out.println("------------------------");
+            marksCalculator.totalMarks(n);
+            
+            System.out.println("");
+            System.out.println("AVERAGE CLASS MARKS");
+            System.out.println("--------------------");
+            System.out.println(marksCalculator.averageMarks(n));
+            
+            System.out.println("");
+            System.out.println("DISPLAYING CLASS GRADES");
+            System.out.println("------------------------");
+            System.out.println(marksCalculator.grade(n));
+        
+        
+            System.out.println("");
+            System.out.println("<<<<<<<<< DISPLAYING FINAL RESULTS >>>>>>>>> ");
+            System.out.println("");
+            marksCalculator.displayInfo(n);
+        
+    }
+}
