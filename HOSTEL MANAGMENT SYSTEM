@@ -1,0 +1,238 @@
+ #include <iostream>
+#include <string>
+using namespace std;
+
+//structure  for storing record of different data types
+
+struct hostel_Data_Record {
+
+    string name;
+    int roll_No;
+    string Department;
+    float CGPA;
+    string isScholarship;
+    string room_condition;
+
+};
+
+
+
+
+// 3D array to store student records
+
+hostel_Data_Record array[5][2][3] = {};
+int rows = 5;
+int columns = 2;
+int depth = 3;
+
+
+
+
+// Flag to check scholarship and room condition
+bool scholarship = false;  
+bool condition = false;
+
+
+
+// function to input student data
+
+void input_student_Record () {
+
+
+for (int k = 0 ; k < 3 ; k++) {
+    for (int i = 0 ; i < 5 ; i++) {
+        for (int j = 0 ; j < 2 ; j++) {
+
+            cout << "Enter student Name: ";
+            getline (cin, array[i][j][k].name);
+            cout <<"Enter the Roll_No: ";
+            cin  >> array[i][j][k].roll_No;
+            cout <<"Enter the Department: ";
+            cin  >> array[i][j][k].Department;
+            cout <<"Enter CGPA: ";
+
+            cin  >> array[i][j][k].CGPA;
+            if (array[i][j][k].CGPA > 3.5){
+                scholarship = true;
+                array[i][j][k].isScholarship = "Eligable for scholarship";
+
+            } 
+            if (scholarship != true){
+                array[i][j][k].isScholarship = "Not Eligable for scholarship";
+            }
+            cout << "Enter the Room Condition(1 for Good and 0 for Bad): ";
+            cin >> array[i][j][k].room_condition;
+            if (array[i][j][k].room_condition == "1"){
+                condition = true;
+                array[i][j][k].room_condition = "Good";
+            } else {
+                array[i][j][k].room_condition = "Bad";  
+            }
+        }
+
+    }
+}
+
+};
+
+
+
+
+
+// function to display students record
+
+void display_Record () {
+
+    for (int k = 0 ; k < 3 ; k++) {
+    for (int i = 0 ; i < 5 ; i++) {
+        for (int j = 0 ; j < 2 ; j++) {
+
+            cout << "Student Name: ";
+            cout << array[i][j][k].name;
+            cout << "Roll_No: ";
+            cout << array[i][j][k].roll_No;
+            cout << "Department: ";
+            cout << array[i][j][k].Department;
+            cout << "CGPA: ";
+            cout << array[i][j][k].CGPA;
+            cout << "Scholarship Status";
+            cout << array[i][j][k].isScholarship;
+            cout << "Room Condition: ";
+            cout << array[i][j][k].room_condition;
+
+
+            }
+        }
+
+    }
+
+};
+
+// function for searching the students
+
+void search_student () {
+
+// flag to show if the search is found or not
+
+bool search_found = false;
+    string search;
+    cout << "Enter the name of the student you want to search: ";
+    cin  >>  search;
+
+
+    for (int k = 0 ; k < 3 ; k++) {
+        for (int i = 0 ; i < 5; i++){
+            for (int j = 0 ; j < 2 ; j++){
+
+                if (array[i][j][k].name == search) {
+
+                    search_found = true;
+                    cout << "Name Found" << endl;
+                    cout << "Here is the details of the student" << endl;
+                    cout <<  "-----------------------------------------\t" << endl;
+                    cout << "Student Name: ";
+                    cout << array[i][j][k].name;
+                    cout << "Roll_No: ";
+                    cout << array[i][j][k].roll_No;
+                    cout << "Department: ";
+                    cout << array[i][j][k].Department;
+                    cout << "CGPA: ";
+                    cout << array[i][j][k].CGPA;
+                    cout << "Scholarship Status";
+                    cout << array[i][j][k].isScholarship;
+                    cout << "Room Condition: ";
+                    cout << array[i][j][k].room_condition;  
+                    
+                    break;
+                }
+                if (search_found = true) break;  // exit 3 loop
+                
+            }
+            if (search_found = true) break;    // exit 2 loop
+
+        }
+        if (search_found = true) break;     // exit 1 loop
+    }
+
+
+
+
+
+ 
+};
+
+
+//  function to allocate students a room according to scholarship status
+
+ void room_Allocation () {
+
+
+    string scholarship_holders = {};
+    string no_scholarship_availed = {};
+
+    for (int k = 0 ; k < 3 ; k++){
+        for (int i = 0 ; i < 5 ; i++){
+            for (int j = 0 ; j < 2 ; j++) {
+
+                if (array[i][j][k].isScholarship == "Eligable for scholarship"){
+                    scholarship_holders = array[i][j][k].isScholarship;
+
+                } else {
+                    no_scholarship_availed = array[i][j][k].isScholarship;
+                }
+
+            }
+        }
+    }
+
+    cout << "Scholar ship holders name";
+    cout << "--------------------------\t" << endl;
+    cout << scholarship_holders << endl;
+    cout << "Scholar ship not availed by students";
+    cout << "---------------------------\t" << endl;
+    cout << no_scholarship_availed << endl;
+
+
+ };
+
+
+
+int main(){
+
+
+    int choice;
+
+
+
+    cout << "-----------------------------------------------------------------------------------\t" << endl;
+    cout << "                            HOSTEL MANAGMENT SYSTEM                                \t" << endl;
+    cout << "-----------------------------------------------------------------------------------\t" << endl;
+    cout << "\n";
+    cout << "     Choose from the drop down menu       " << endl ;
+    cout << "\n";
+
+    cout <<  "Enter student Record (Press 1)" << endl;
+    cout <<  "Display Record (Press 2) " << endl;
+    cout <<  "Search Record (Press 3) " << endl;
+    cout <<  "Allocate Students based on scholarship status (Press 4) " << endl;
+    cout  << "Enter choice: ";
+    cout << "Enter 0 to exit: ";
+    cin >> choice;
+
+    switch (choice){
+
+    case 0 : cout << "Exit code " << endl;
+    break;
+    case 1 : void input_student_Record ();
+    case 2 : void display_Record ();
+    case 3 : void search_student ();
+    case 4 : void room_Allocation ();
+
+    default : 
+    cout << "invalid input " << endl;
+
+    }
+  
+
+    return 0;
+}
