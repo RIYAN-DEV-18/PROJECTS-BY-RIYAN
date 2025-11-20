@@ -1,0 +1,136 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+void displayBooking() {
+
+    int rows = 10;
+    int columns = 5;
+
+    string booking[10][5] = {   
+        {"1", "A1","   ", "A2", "A3"},
+        {"2", "B1","   ","B2", "B3"},
+        {"3", "C1","   ","C2", "C3"},
+        {"!!", "D1","   ","D2", "D3"},
+        {"5", "E1","   ","E2", "E3"},
+        {"6", "F1","   ","F2", "F3"},
+        {"7", "G1","   ","G2", "G3"},
+        {"8", "H1","   ","!!", "H3"},
+        {"9", "I1","   ","I2", "I3"},
+        {"10","J1","   ","J2","J3"},
+    };
+    
+    cout<<endl;
+    cout<<"--------------------------------------"<<endl;
+    cout<<"Faisal movers seat booking system"<<endl;    
+    cout<<"--------------------------------------"<<endl;
+    cout<<endl;
+
+
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 5; j++){
+             cout<<booking[i][j]<<"  \t";
+            }
+            cout<<endl;
+        }
+    cout<<"--------------------------------------"<<endl;
+
+
+
+    int seats; 
+    string seat_number; 
+
+
+    cout<<"Enter the number of seats to be booked: ";
+    cin>>seats;
+    cout<<endl;
+
+    cout<<"--------------------------------------"<<endl;
+
+    
+
+    for (int k = 0; k < seats; k++){
+        cout<<"Enter the seat number to be booked: ";
+        cin>>seat_number;
+        cout<<endl;
+
+        bool seat_found = false;
+        
+
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < columns; j++){
+
+                if (booking[i][j] == seat_number) {
+                    seat_found = true;
+
+
+                     if (booking[i][j]=="   ") {
+                        cout<<"Please enter a valid seat number!"<<endl;
+                        cout<<"--------------------------------------"<<endl;  
+                        cout<<endl;
+                        break;
+                        }
+                        else if (booking[i][j] == "X") {
+                        cout<<"Seat number "<<seat_number<<": already booked!"<<endl;
+                        cout<<"--------------------------------------"<<endl;
+                        cout<<endl;
+                        break;
+                         }
+                        else if (booking[i][j] == "!!") {
+                        cout<<"This seat is not available!"<<endl;
+                        cout<<"--------------------------------------"<<endl;   
+                        cout<<endl;
+                        break;
+                       }
+                     
+                    else {
+                    booking[i][j] = "X";
+                    cout<<"Seat number "<<seat_number<<": booked successfully!"<<endl;
+                    cout<<"--------------------------------------"<<endl;
+                    }
+                    break;
+                }
+            }
+            
+            if (seat_found) {
+            break; }   
+        }
+
+        if (!seat_found) {
+            cout<<"Seat number "<<seat_number<<": not found!"<<endl;
+            cout<<"--------------------------------------"<<endl;
+            cout<<endl;
+            
+            
+        }
+        
+           
+    }
+   
+    cout<<"--------------------------------------"<<endl;   
+    cout<<"Booking Details"<<endl;
+    cout<<"X = booked                !! = not available"<<endl;
+    cout<<"--------------------------------------"<<endl;
+    cout<<endl;
+    
+
+    for (int i = 0; i < 10; i++){
+        for (int j = 0; j < 5; j++){
+             cout<<booking[i][j]<<"  \t";
+            }
+            cout<<endl;
+    }
+    cout<<"--------------------------------------"<<endl;
+}
+
+
+int main () {
+
+    cout << "Welcome to the Train Seat Booking System!\n";
+    cout << "--------------------------------------\n";
+
+    displayBooking();
+    cout<<"Thank you for using the seat booking system!"<<endl;
+    return 0;
+}
